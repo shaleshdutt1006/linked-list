@@ -40,22 +40,20 @@ public class LinkedList<T> {
         return -1;
     }
 
-    public void insertAt(int pos, T value) {
-        Node<T> node = new Node<T>(value);
+    public void delete(int pos, T value) {
         if (pos == 0) {
-            node.next = head;
-            head = node;
+            head = head.next;
             return;
         }
-        Node<T> previous = head;
-        for (int i = 0; i < pos; i++) {
+        Node previous = head;
+        for (int i = 0; i < pos - 1; i++) {
             previous = previous.next;
         }
-        node.next = previous.next;
-        previous.next = node;
+        previous.next = previous.next.next;
     }
 
     public void display() {
+        int count = 0;
         if (head == null) {
             System.out.println("List is empty");
         }
@@ -63,18 +61,30 @@ public class LinkedList<T> {
         while (currnode != null) {
             System.out.println(currnode.data + " ");
             currnode = currnode.next;
+            count++;
         }
+    }
 
+    public int size() {
+        int count = 0;
+        Node<T> currnode = head;
+        while (currnode != null) {
+            currnode = currnode.next;
+            count++;
+        }
+        return count;
     }
 
     public static void main(String[] args) {
         LinkedList list = new LinkedList();
         list.add(56);
         list.add(30);
+        list.add(40);
         list.add(70);
-        System.out.println("Position of the element is : " + list.search(30));
-        list.insertAt(list.search(30), 40);
-        System.out.println("Linked list after insertion is : ");
+        System.out.println("Position of the element " + "40" + " is : " + list.search(40));
+        list.delete(list.search(40), 40);
+        System.out.println("Linked list after deletion is : ");
         list.display();
+        System.out.println("Size of linked list is : " + list.size());
     }
 }
