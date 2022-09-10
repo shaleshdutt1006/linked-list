@@ -1,20 +1,20 @@
 package com.bridgelabz;
 
-public class LinkedList {
-    public static Node head;
+public class LinkedList<T> {
+    public Node head;
     public Node tail;
 
-    static class Node {
-        int data;
+    class Node {
+        T data;
         Node next;
 
-        Node(int data) {    // when we call this constructor it will create new node everytime
+        Node(T data) {
             this.data = data;
             this.next = null;
         }
     }
 
-    public void add(int data) {
+    public void add(T data) {
         Node newNode = new Node(data);
         if (head == null) {
             head = newNode;
@@ -31,7 +31,17 @@ public class LinkedList {
         if (head == null) {
             System.out.println("The list is empty");
         }
-        head = head.next;
+        if (head.next == null) {
+            head = null;
+        }
+        Node secondLast = head;
+        Node lastNode = head.next;
+        while (lastNode.next != null) {
+            lastNode = lastNode.next;
+            secondLast = secondLast.next;
+        }
+        secondLast.next = null;
+
     }
 
     public void display() {
@@ -43,15 +53,15 @@ public class LinkedList {
             System.out.println(currnode.data + " ");
             currnode = currnode.next;
         }
-        System.out.println("null");
     }
 
     public static void main(String[] args) {
-
         LinkedList list = new LinkedList();
         list.add(56);
         list.add(30);
         list.add(70);
+        list.add("dutt");
+        list.add(2.6f);
         list.delete();
         list.display();
     }
