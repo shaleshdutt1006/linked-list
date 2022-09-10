@@ -27,19 +27,11 @@ public class LinkedList {
         currnode.next = newNode;
     }
 
-    public void insert(int data, Node head, int pos) {
-        Node newNode = new Node(data);
-        if (pos == 0) {
-            newNode.next = head;
-            head = newNode;
-            return;
+    public void delete() {
+        if (head == null) {
+            System.out.println("The list is empty");
         }
-        Node previous = head;
-        for (int i = 0; i < pos - 1; i++) {
-            previous = previous.next;
-        }
-        newNode.next = previous.next;
-        previous.next = newNode;
+        head = head.next;
     }
 
     public void display() {
@@ -58,8 +50,9 @@ public class LinkedList {
 
         LinkedList list = new LinkedList();
         list.add(56);
+        list.add(30);
         list.add(70);
-        list.insert(30, head, 1);
+        list.delete();
         list.display();
     }
 }
